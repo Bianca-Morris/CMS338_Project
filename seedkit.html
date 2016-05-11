@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<!--
+Author: Bianca Morris
+Client: SeedKit
+Purpose: CMS .338 Final Project
+Date: 5/11/2016
+-->
+<head>
+    <meta charset="utf-9">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeedKit's 'Education Impact: Global Data Explorer'</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <style>
+	  .title-bar {
+        background-color: #b5d093;
+      }
+      #logo {
+        float:left;
+      }
+      #pageTitle {
+        float:left;
+	  }
+	  #foot2 {
+		float:right;
+      }  
+    </style>
+ 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts-more.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script>
+    $(document).foundation()
+    </script>
+</head>
+
+<body>
+	<div class="row">
+    	<img id="logo" src="img/SeedKitLOGO_Color.svg" alt="SeedKit: Science Education Equity Development Kit" width="350px"></img>
+    </div>
+    <div class="row">
+    	<div class="title-bar">
+        	<div class="title-bar-left">
+            	<span class="title-bar-title">Education Impact: Global Data Explorer</span>
+        	</div>
+      	</div>
+    </div>
+    <div class="row">
+    	<ul class="tabs" data-tabs id="tabs">
+        	<li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Home</a></li>
+        	<li class="tabs-title"><a href="#panel2">About SeedKit</a></li>
+        	<li class="tabs-title"><a href="#panel3">Contact Us</a></li>
+      	</ul>
+        <div class="tabs-content" data-tabs-content="tabs">
+            <div class="tabs-panel is-active" id="panel1">
+                <div class="row">
+                    <div class="small-12 medium-8 large-8 columns">
+                        <div id="container"></div>
+                        <label>Choose an education metric:
+                        	<select id="range">
+                            	<option value="secondary">Net Enrollment of Females in Secondary School</option>
+    							<option value="primary">Net Enrollment of Females in Primary School</option>
+                            </select>
+                        </label>
+                        <label>Choose a social/economic metric:
+                        	<select id="domain">
+                            	<option value ="water">Population Without Water Access (%)</option>
+    							<option value ="births">Average Births Per Woman (#)</option>
+    							<option value ="teenBirths">Births to Females Aged 15-19 (per 1000)</option>
+   							 	<option value ="skilledBirths">Births with Aid of Skilled Staff (%)</option>
+    							<option value ="gdpGrowth">Yearly GDP Growth (%)</option>
+                            </select>
+                        </label>
+                        <a id="explore" class="button">Explore</a>
+                    </div>
+                    <div class="small-12 medium-4 large-4 columns">         
+                        <ul class="accordion" data-accordion role="tablist">
+                        	 <li class="accordion-item">
+                                <a href="#panel1d" role="tab" class="accordion-title" id="panel1d-heading" aria-controls="panel1d">Data Guide</a>
+                                <div id="panel1d" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel1d-heading">
+                                	<p>Glossary:   <span class="label">GDP</span> <span class="label">Yearly GDP Growth</span> <span class="label">Net Enrollment</span> <span class="label">Gross Enrollment</span> <span class="label">Births Per 1000</span><span class="label">Percent of Population</span></p>
+                                    <p>
+                                    Note: This plot is not meant to suggest direct causation between these various metrics, but to encourage users to engage critically with the data and think about the issue of women's education as it relates to global development and economics.
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="accordion-item">
+                                <a href="#panel1d" role="tab" class="accordion-title" id="panel1d-heading" aria-controls="panel1d">Resources</a>
+                                <div id="panel1d" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel1d-heading">
+                                    <div class="callout primary">
+  										<h5><a href="http://www.huffingtonpost.com/2015/01/23/women-girls-poverty-bill-gates-foundation-video_n_6511878.html">"Empowering Women And Girls Is The Key To Ending Poverty, And Here Are Numbers To Prove It"</a></h5>
+  										<p>Jacqueline Howard, The Huffington Post</p>  		
+									</div>
+                                    <div class="callout primary">
+  										<h5><a href="http://www.undp.org/content/undp/en/home/ourwork/povertyreduction/focus_areas/focus_gender_and_poverty.html">"Gender and Poverty Reduction"</a></h5>
+  										<p>United Nations Development Program</p>  		
+									</div>
+                                    <div class="callout primary">
+  										<h5><a href="http://www.unicef.org/media/media_11986.html">On Girl's Education and Poverty Eradication</a></h5>
+  										<p>Carol Bellamy, UNICEF</p>  		
+									</div>
+                                </div>
+                            </li>
+                            <li class="accordion-item">
+                                <a href="#panel1d" role="tab" class="accordion-title" id="panel1d-heading" aria-controls="panel1d">Other Links</a>
+                                <div id="panel1d" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel1d-heading">
+                                    <p>Melinda Gates at TEDxChange, <a href="http://www.ted.com/talks/melinda_gates_let_s_put_birth_control_back_on_the_agenda">Let's put birth control back on the agenda"</a></p>
+                                    <p><a href="http://www.halftheskymovement.org/videos">Various Interviews</a> by the filmmakers behind "Half The Sky"</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="tabs-panel" id="panel2">
+            	<div class="row">
+                	<div class="medium-12 columns">
+                    	<h4>About SeedKit</h4>
+		                <blockquote> Bringing fun, affordable, sustainable and equitable science experiments to the world!
+							<cite>Our Mission Statement</cite>
+        	            </blockquote>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="medium-7 columns">
+                    	<a href="https://seedkit.wordpress.com/seedkit-about-us/meet-the-team/"><img src="img/team.jpg"></img></a>
+					</div>
+                    <div class="medium-5 columns">
+                    	<p>We at SeedKit are dedicated to producing low-cost, sustainable, and engaging science experiments for use in low-resource classrooms around the world. Each kit comes with a set of experiment protocols for teacher and up to 24 students, as well as most of the materials necessary to complete the labs without electricity, running water, or difficult-to-obtain supplies.</p>
+                        <p>Our first set of kits was created with the high schooler in mind, and contains fun lab activities in Physics, Chemistry, and Biology. This summer, a couple of lucky SeedKit team members are going abroad to see the new prototypes in action and bring back feedback from teachers and students.</p>
+                        <p>Wanna know more? Visit our <a href="HTTP://www.seedkit.wordpress.com">website</a>!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tabs-panel" id="panel3">
+            	<div class="row">
+                	<div class="medium-12 columns">
+                    	<h4>We would love to hear from you!</h4>
+                    </div>
+                </div>
+                <div class="row">
+                	<div class="medium-6 columns">
+                    	<p>Send us a message using the form below...</p>
+                    	<form action="mailto:seedkitinfo@gmail.com" method="post" enctype="text/plain">         
+                    		<label>Name:
+                        		<input type="text" name="name" placeholder="Wendy">
+                            </label>
+                        	<label>Email:
+	                        	<input type="email" name="mail" placeholder="wwelle@wellesley.edu">
+                            </label>
+                            <label>Message:
+                            	<textarea name="comment" placeholder="Leave us a note..."></textarea>
+                            </label>
+                            <input type="submit" value="Send">
+                            <input type="reset" value="Reset">                      
+                    	</form>
+                    </div>
+                    <div class="medium-6 columns">
+                    	<p>Or send us a message manually on:</p>
+                        	<a href="https://www.facebook.com/seedkit/"><img src="img/webicon-facebook.svg" width="40px"/></a>
+                            <a href="https://seedkit.wordpress.com/"><img src="img/webicon-wordpress.svg" width="40px"/></a>
+                            <a href="mailto:seedkitinfo@gmail.com"><img src="img/webicon-mail.svg" width="40px"/></a>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    	<div class="medium-4 columns">
+	      	<p>
+	        &copy; 2016 <a href="http://bianca-morris.com">Bianca Morris</a> & <a href="https://seedkit.wordpress.com">SeedKit</a>
+	      	</p>
+	    </div>
+        <div class="medium-8 columns" id="foot2">
+        	<p>
+            Thanks to: <a href="http://foundation.zurb.com/">Zurb</a>, <a href="http://www.highcharts.com/">HighCharts</a>
+            </p>
+        </div>
+	</div>
+    <script src="js/app.js"></script>
+    <script src="js/graphApp.js"></script>
+	<script>
+		//responds to click on the "explore" button
+		$('#explore').click(function() {
+			try {
+				chart.destroy()
+			}
+			catch(e){}
+			finally {
+			//chooses correct domain and range data
+			changeRange();
+			changeDomain();
+			//draws chart with new data
+			chart = drawChart();
+			};
+		});
+		
+		//updates the Range
+		function changeRange(){
+			while ($('#range').val() == "secondary") {
+    		y = secondaryData;
+			ylabel = "Net Enrollment of Females in Secondary School";
+    		break;
+  			}
+  			while ($('#range').val() == "primary") {  
+    		y = primaryData;
+			ylabel = "Net Enrollment of Females Primary School";
+    		break;
+			}
+		};
+		//updates the Domain
+		function changeDomain() {
+			while ($('#domain').val() == "water") {
+    		x = waterData;
+			xlabel = "Population Without Water Access (%)";
+    		break;
+  			}
+  			while ($('#domain').val() == "teenBirths") {  
+    		x = tbirthData;
+			xlabel = "Births to Females Aged 15-19 (per 1000)";
+    		break;
+			}
+			while ($('#domain').val() == "skilledBirths") {  
+    		x = ssbirthData;
+			xlabel = "Births with Aid of Skilled Staff (%)";
+    		break;
+			}
+			while ($('#domain').val() == "births") {  
+    		x = birthData;
+			xlabel = "Average Births Per Woman";
+    		break;
+			}
+			while ($('#domain').val() == "gdpGrowth") {  
+    		x = gdpData;
+			xlabel = "Yearly GDP Growth (%)";
+    		break;
+			}
+		};
+		//draws the default chart
+        //code adapted from the 'bubble chart' demo on highcharts.com
+        function drawChart() {
+            $('#container').highcharts({
+                chart: {
+                    type: 'bubble',
+                    plotBorderWidth: 1,
+                    zoomType: 'xy'
+                },
+                
+                legend: {
+                    enabled: false
+                },
+                
+                title: {
+                    text: "What Influences the Academic Success of Women on a Global Scale?"
+                },
+                
+                subtitle: {
+                    text: 'Source: <a href="http://data.un.org/Explorer.aspx">UN Data</a>'
+                },
+                
+                xAxis: {
+                    gridLineWidth: 0,
+                    title: {
+                        text: xlabel
+                    },
+                    labels: {
+                        format: '{value}'
+                    }
+                },
+                
+                yAxis: {
+					gridLineWidth: 0,
+                    startOnTick: false,
+                    endOnTick: false,
+                    title: {
+                        text: ylabel
+                    },
+                    labels: {
+                        format: '{value}'
+                    },
+                    maxPadding: 0.2                  
+                },
+                tooltip: {
+                    useHTML: true,
+                    headerFormat: '<table>',
+                    pointFormat: '<tr><th colspan="2"><h3>{point.country}</h3></th></tr>' + '<tr><th>' + xlabel + '</th><td>{point.x}</td></tr>' + '<tr><th>' + ylabel + '</th><td>{point.y}</td></tr>',
+                    footerFormat: '</table>',
+                    followPointer: true
+                    },
+                plotOptions: {
+                    series: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}'
+                        }
+                    }
+                },
+    
+                series: [{
+                    data: [
+						{ y: +y[0][1], x: +x[0][1], name: 'AM', country: 'Armenia' },
+						{ y: +y[1][1], x: +x[1][1], name: 'BH', country: 'Bahrain' },
+						{ y: +y[2][1], x: +x[2][1], name: 'BB', country: 'Barbados' },
+						{ y: +y[3][1], x: +x[3][1], name: 'BY', country: 'Belarus' },
+						{ y: +y[4][1], x: +x[4][1], name: 'BZ', country: 'Belize' },
+						{ y: +y[5][1], x: +x[5][1], name: 'BG', country: 'Bulgaria' },
+						{ y: +y[6][1], x: +x[6][1], name: 'KH', country: 'Cambodia' },
+						{ y: +y[7][1], x: +x[7][1], name: 'CV', country: 'Cape Verde' },
+						{ y: +y[8][1], x: +x[8][1], name: 'CU', country: 'Cuba' },
+						{ y: +y[9][1], x: +x[9][1], name: 'EE', country: 'Estonia' },
+						{ y: +y[10][1], x: +x[10][1], name: 'ET', country: 'Ethiopia' },
+						{ y: +y[11][1], x: +x[11][1], name: 'GD', country: 'Grenada' },
+						{ y: +y[12][1], x: +x[12][1], name: 'GN', country: 'Guinea' },
+						{ y: +y[13][1], x: +x[13][1], name: 'HU', country: 'Hungary' },
+						{ y: +y[14][1], x: +x[14][1], name: 'JM', country: 'Jamaica' },
+						{ y: +y[15][1], x: +x[15][1], name: 'KZ', country: 'Kazakhstan' },
+						{ y: +y[16][1], x: +x[16][1], name: 'LA', country: 'Lao PDR' },
+						{ y: +y[17][1], x: +x[17][1], name: 'LT', country: 'Lithuania' },
+						{ y: +y[18][1], x: +x[18][1], name: 'MR', country: 'Mauritius' },
+						{ y: +y[19][1], x: +x[19][1], name: 'MN', country: 'Mongolia' },
+						{ y: +y[20][1], x: +x[20][1], name: 'OM', country: 'Oman' },
+						{ y: +y[21][1], x: +x[21][1], name: 'PK', country: 'Pakistan' },
+						{ y: +y[22][1], x: +x[22][1], name: 'PA', country: 'Panama' },
+						{ y: +y[23][1], x: +x[23][1], name: 'PL', country: 'Poland' },
+						{ y: +y[24][1], x: +x[24][1], name: 'RO', country: 'Romania' },
+						{ y: +y[25][1], x: +x[25][1], name: 'SN', country: 'Senegal' },
+						{ y: +y[26][1], x: +x[26][1], name: 'SI', country: 'Slovenia' },
+						{ y: +y[27][1], x: +x[27][1], name: 'TJ', country: 'Tajikistan' },
+						{ y: +y[28][1], x: +x[28][1], name: 'UA', country: 'Ukraine' }
+                     ]
+				}],
+            });
+        };
+    </script>
+</body>
+</html>
